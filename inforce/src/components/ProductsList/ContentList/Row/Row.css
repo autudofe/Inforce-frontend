@@ -1,0 +1,37 @@
+.block {
+    margin-top: 0.98em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #e8eaf5;
+    height: 3.44em;
+}
+
+.block_style {
+    background-color: #cecfd5;
+}
+
+p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.circle_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #616161;
+    border-radius: 50%;
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.name {
+    color: #39393b;
+    width: 19%;
+}
+
+.tools i {
+    margin-right: 14.5%;
+}
