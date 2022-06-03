@@ -1,0 +1,43 @@
+
+* {
+    font-family: Roboto, sans-serif;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+.container {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    /*margin: 10px auto;*/
+    z-index: 2;
+    /*padding: 10px;*/
+}
+
+
+.modalActive {
+    display: flex;
+
+}
+
+
+
+
+.close {
+    align-self: flex-end;
+    cursor: pointer;
+    color: #ffffff;
+    margin-bottom: 30px;
+}

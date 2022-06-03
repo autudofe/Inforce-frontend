@@ -1,26 +1,27 @@
-import "./Header.css";
 import React from "react";
+import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({sortBy, setSortBy, openModal}) => {
+    const filter = () => {
+        sortBy === "name" ? setSortBy("count") : setSortBy("name")
+    }
+
   return (
-    <header>
-      <div className="icon ">
-        <></>
-      </div>
-      <div className="name ">
-        <p className="header_text_style">Name</p>
-      </div>
-      <div className="count ">
-        <p className="header_text_style">Count</p>
-      </div>
-      <div className="weight ">
-        <p className="header_text_style">Weight</p>
-      </div>
-      <div className="comments ">
-        <p className="header_text_style">Comments</p>
-      </div>
-      <div className="tools ">
-        <i className="fa-solid fa-box-archive " />
+    <header className={styles.header}>
+        <button onClick={openModal} className={styles.button}>
+            CREATE PRODUCT
+        </button>
+      <div onClick={filter} className={styles.tools}>
+          FILTER
+        {sortBy === "name" ? (
+          <i
+            className="fa-solid fa-arrow-down-a-z"
+          />
+        ) : (
+          <i
+            className="fa-solid fa-arrow-down-1-9"
+          />
+        )}
       </div>
     </header>
   );

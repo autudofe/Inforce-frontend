@@ -1,0 +1,47 @@
+.button, .field{
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    width: 150px;
+    border-radius: 3px;
+    border: 1px solid #00b7ff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.button:hover{
+    background-color: #00b7ff;
+    color: white;
+}
+
+.errors{
+    color: #ff0000;
+    font-size: 12px;
+}
+.field{
+    font-size: 1em;
+    border-radius: 5px;
+    line-height: 22px;
+    border: 1px solid #00a5ff;
+    transition: all 0.3s;
+    padding: 8px;
+    margin-top: 10px;
+width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    outline: 0;
+    background-color: #ffffff;
+    color: black;
+    resize: none;
+}
+.form{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    width: 100%;
+}

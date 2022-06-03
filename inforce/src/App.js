@@ -1,12 +1,18 @@
 import "./App.css";
 import ProductsList from "./components/ProductsList/ProductsList";
-import ModalWindow from "./components/ModalWindow/ModalWindow";
+import {Navigate, Route, Routes} from "react-router-dom";
+import ProductView from "./components/ProductsList/ProductView/ProductView";
+import React from "react";
 
 function App() {
   return (
     <div className="App">
-      <ProductsList />
-      <ModalWindow />
+        <Routes>
+            <Route path="/" element={<Navigate replace to="/listView" />} />
+            <Route path="/listView" element={<ProductsList />} />
+            <Route path="/productView/:id/" element={<ProductView />} />
+        </Routes>
+
     </div>
   );
 }

@@ -1,15 +1,4 @@
-.block {
-    margin-top: 0.98em;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    background-color: #e8eaf5;
-    height: 3.44em;
-}
 
-.block_style {
-    background-color: #cecfd5;
-}
 
 p {
     overflow: hidden;
@@ -34,4 +23,5 @@ p {
 
 .tools i {
     margin-right: 14.5%;
+
 }

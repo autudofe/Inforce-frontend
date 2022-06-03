@@ -2,8 +2,25 @@
     margin: 0;
     padding: 0;
     font-family: Roboto, sans-serif;
+
+
 }
 
 .App {
     width: 62.5em;
+}
+
+/*
+.fa-eye, .fa-trash, .fa-arrow-left, .fa-pen, .fa-arrow-down-a-z, .fa-solid, .fa-arrow-down-1-9 {
+    cursor: pointer;
+    color: #000000;
+}*/
+.fa-solid{
+    cursor: pointer;
+}
+.fa-eye{
+    color: #0088ff;
+}
+.fa-trash{
+    color: #ff0000;
 }
