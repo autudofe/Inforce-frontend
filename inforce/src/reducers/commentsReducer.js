@@ -1,7 +1,8 @@
 import {
-  ADD_COMMENT, ADD_COMMENT_DATA,
-  DELETE_COMMENT, DELETE_PRODUCT,
-  DELETE_PRODUCT_COMMENTS,
+  ADD_COMMENT,
+  ADD_COMMENTS_DATA,
+  DELETE_COMMENT,
+  DELETE_PRODUCT_AND_COMMENTS,
   EDIT_COMMENT,
 } from "./actions/actionTypes";
 
@@ -11,7 +12,7 @@ const defaultState = {
 
 export const commentsReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_COMMENT_DATA:
+    case ADD_COMMENTS_DATA:
       return { ...state, comments: [...action.payload] };
     case ADD_COMMENT:
       return { ...state, comments: [...state.comments, action.payload] };
@@ -20,8 +21,7 @@ export const commentsReducer = (state = defaultState, action) => {
         ...state,
         comments: [
           ...state.comments.map((comment) =>
-            comment.id === action.payload.id &&
-            comment.productId === action.payload.productId
+            comment.id === action.payload.id
               ? { ...comment, ...action.payload }
               : comment
           ),
@@ -32,20 +32,16 @@ export const commentsReducer = (state = defaultState, action) => {
         ...state,
         comments: [
           ...state.comments.filter(
-            (comment) =>
-              !(
-                comment.id === action.payload.id &&
-                comment.productId === action.payload.productId
-              )
+            (comment) => !(comment.id === action.payload)
           ),
         ],
       };
-    case DELETE_PRODUCT:
+    case DELETE_PRODUCT_AND_COMMENTS:
       return {
         ...state,
         comments: [
           ...state.comments.filter(
-            (comment) => !(comment.id === action.payload.id)
+            (comment) => !(comment.productId === action.payload)
           ),
         ],
       };

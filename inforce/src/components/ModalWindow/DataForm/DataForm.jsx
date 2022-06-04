@@ -48,7 +48,7 @@ const DataForm = ({ onSubmit, closeModal, initialData = null }) => {
             <Field
               name="name"
               autoComplete="off"
-              placeholder="Name"
+              placeholder="Name: Ihor"
               className={classNames(styles.field, {[styles.invalid]:(errors.name && touched.name)})}
             />
             {errors.name && touched.name ? (
@@ -57,7 +57,7 @@ const DataForm = ({ onSubmit, closeModal, initialData = null }) => {
             <Field
               name="count"
               autoComplete="off"
-              placeholder="Count"
+              placeholder="Count: 4"
               className={classNames(styles.field, {[styles.invalid]:(errors.count && touched.count)})}
             />
             {errors.count && touched.count ? (
@@ -66,7 +66,7 @@ const DataForm = ({ onSubmit, closeModal, initialData = null }) => {
             <Field
               name="size.width"
               autoComplete="off"
-              placeholder="Width"
+              placeholder="Width: 100"
               className={classNames(styles.field, {[styles.invalid]:(errors.size && touched.size)})}
             />
             {errors.size && touched.size ? (
@@ -75,7 +75,7 @@ const DataForm = ({ onSubmit, closeModal, initialData = null }) => {
             <Field
               name="size.height"
               autoComplete="off"
-              placeholder="Height"
+              placeholder="Height: 200"
               className={classNames(styles.field, {[styles.invalid]:(errors.size && touched.size)})}
             />
             {errors.size && touched.size ? (
@@ -84,7 +84,7 @@ const DataForm = ({ onSubmit, closeModal, initialData = null }) => {
             <Field
               name="weight"
               autoComplete="off"
-              placeholder="Weight"
+              placeholder="Weight: 300g"
               className={classNames(styles.field, {[styles.invalid]:(errors.weight && touched.weight)})}
             />
             {errors.weight && touched.weight ? (

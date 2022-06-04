@@ -1,4 +1,6 @@
-Start with server `npm run dev`
+Start with server:
+
+### `npm run dev`
 
 # Getting Started with Create React App
 

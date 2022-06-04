@@ -3,12 +3,12 @@ import styles from "../ProductView.module.css";
 import classNames from "classnames";
 import Comments from "./Comments";
 import { useParams } from "react-router-dom";
-import ModalWindow from "../../../ModalWindow/ModalWindow";
 import CommentsForm from "../CommentsForm/CommentsForm";
-import { addComment, editComment } from "../../../../reducers/actions/actions";
 import { useDispatch } from "react-redux";
-import { getDateNow } from "../../../../helpers";
-import ProductServices from "../../../../API/ProductServices";
+import ProductServices from "../../../API/ProductServices";
+import { addComment, editComment } from "../../../reducers/actions/actions";
+import ModalWindow from "../../ModalWindow/ModalWindow";
+import { getDateNow } from "../../../helpers";
 
 const CommentsBlockComponent = () => {
   const dispatch = useDispatch();
@@ -17,16 +17,18 @@ const CommentsBlockComponent = () => {
   const productId = Number(useParams().id);
 
   const onEditComment = (values) => {
-      const comment = {
-          ...values,
-          date: getDateNow(),
+    const comment = {
+      ...values,
+      date: getDateNow(),
+    };
+
+    new ProductServices().editComment(comment.id, comment).then((r) => {
+      if (r.status === 200) {
+        dispatch(editComment(r.data));
+      } else {
+        console.log(r.statusText);
       }
-    dispatch(
-      editComment(comment)
-    );
-    new ProductServices()
-      .editComment(values.productId, values.id, comment)
-      .then((r) => console.log(r));
+    });
   };
 
   const onAddComment = (values) => {
@@ -36,11 +38,14 @@ const CommentsBlockComponent = () => {
       ...values,
       date: getDateNow(),
     };
-    dispatch(addComment(comment));
-    new ProductServices().addComment(comment).then((r) => console.log(r));
-    new ProductServices()
-      .addCommentProduct(productId)
-      .then((r) => console.log(r));
+
+    new ProductServices().addComment(comment).then((r) => {
+      if (r.status === 201) {
+        dispatch(addComment(r.data));
+      } else {
+        console.log(r.statusText);
+      }
+    });
   };
 
   const handleCloseModal = () => {
