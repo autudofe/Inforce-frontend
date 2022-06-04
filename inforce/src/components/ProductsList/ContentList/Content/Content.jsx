@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../../reducers/actions/actions";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
+import ProductServices from "../../../../API/ProductServices";
 
 let countComments;
 const Content = ({ product: { id, count, name, imageUrl, comments } }) => {
@@ -16,6 +17,9 @@ const Content = ({ product: { id, count, name, imageUrl, comments } }) => {
 
   const deleteElement = () => {
     dispatch(deleteProduct(id));
+    new ProductServices().deleteProduct(id).then((r) => console.log(r));
+    new ProductServices().deleteComments(id).then((r) => console.log(r));
+    console.log('id', id)
   };
 
   return (
