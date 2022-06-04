@@ -1,32 +1,36 @@
 import React, {useEffect, useState} from "react";
 import styles from "./ProductView.module.css";
 import { NavLink, useParams } from "react-router-dom";
-import DataForm from "../../ModalWindow/DataForm/DataForm";
-import ModalWindow from "../../ModalWindow/ModalWindow";
 import CommentsBlock from "./Comments/CommentsBlock";
-import ProductServices from "../../../API/ProductServices";
+import ProductServices from "../../API/ProductServices";
+import ModalWindow from "../ModalWindow/ModalWindow";
+import DataForm from "../ModalWindow/DataForm/DataForm";
 
 const ProductView = () => {
-  const productId = Number(useParams().id);
-
+  const id = Number(useParams().id);
   const [product, setProduct] = useState({})
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    new ProductServices().getProduct(id).then((r) => setProduct(r.data));
+  }, [id]);
 
   const onEditProduct = values =>{
     new ProductServices()
-        .editProduct(productId, values)
-        .then((r) => console.log(r));
+        .editProduct(id, values)
+        .then((r) => {
+          if (r.status === 200) {
+            setProduct(r.data)
+          } else {
+            console.log(r.statusText);
+          }
+        });
   }
 
-  useEffect(() => {
-    new ProductServices().getProduct(productId).then((r) => setProduct(r.data));
-  }, [onEditProduct]);
 
-  const [showModal, setShowModal] = useState(false);
 
   const { name, count, size, weight, imageUrl } = product;
 
-
-    
 
   if (!Object.keys(product).length) return <div className={styles.loading}>Loading...</div>;
   return (
@@ -47,8 +51,6 @@ const ProductView = () => {
         </div>
 
         <div className={styles.name}>{name}</div>
-
-
 
         <div className={styles.productInfo}>
           <div className={styles.productInfoContent}>

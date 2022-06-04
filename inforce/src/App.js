@@ -1,8 +1,9 @@
 import "./App.css";
 import ProductsList from "./components/ProductsList/ProductsList";
 import {Navigate, Route, Routes} from "react-router-dom";
-import ProductView from "./components/ProductsList/ProductView/ProductView";
+
 import React from "react";
+import ProductView from "./components/ProductView/ProductView";
 
 function App() {
   return (

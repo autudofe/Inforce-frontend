@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Content from "./Content/Content";
 import styles from './ContentList.module.css'
 import ProductServices from "../../../API/ProductServices";
-import {addProductData} from "../../../reducers/actions/actions";
+import {addProductsData} from "../../../reducers/actions/actions";
 
 const sportByParam = sortBy => (a, b) => {
   if (a[sortBy] === b[sortBy]) {
@@ -16,7 +16,7 @@ const ContentList = ({sortBy}) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    new ProductServices().getProducts().then((r) => dispatch(addProductData(r.data)));
+    new ProductServices().getProducts().then((r) => dispatch(addProductsData(r.data)));
   }, []);
 
   const products = useSelector((state) => state.products.products);

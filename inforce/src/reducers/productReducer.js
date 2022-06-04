@@ -1,10 +1,7 @@
 import {
-  ADD_COMMENT,
-  ADD_COMMENTS_PRODUCT,
-  ADD_PRODUCT, ADD_PRODUCT_DATA, DELETE_COMMENT, DELETE_COMMENTS_PRODUCT,
-  DELETE_PRODUCT,
-  EDIT_COMMENT, EDIT_COMMENTS, EDIT_COMMENTS_PRODUCT,
-  EDIT_PRODUCT,
+  ADD_PRODUCT,
+  ADD_PRODUCTS_DATA,
+  DELETE_PRODUCT_AND_COMMENTS,
 } from "./actions/actionTypes";
 
 const defaultState = {
@@ -13,51 +10,16 @@ const defaultState = {
 
 export const productReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_PRODUCT_DATA:
+    case ADD_PRODUCTS_DATA:
       return { ...state, products: [...action.payload] };
     case ADD_PRODUCT:
       return { ...state, products: [...state.products, action.payload] };
-    case EDIT_PRODUCT:
+    case DELETE_PRODUCT_AND_COMMENTS:
       return {
         ...state,
         products: [
-          ...state.products.map((product) =>
-            product.id === action.payload.id
-              ? { ...product, ...action.payload }
-              : product
-          ),
+          ...state.products.filter((card) => card.id !== action.payload),
         ],
-      };
-    case DELETE_COMMENT:
-      console.log(typeof action.payload.productId)
-      return {
-        ...state,
-        products: [
-          ...state.products.map((product) =>
-              product.id === action.payload.productId
-                  ? { ...product, comments: [...product.comments.filter(item=>item !== action.payload.id)] }
-                  : product
-          ),
-        ],
-      };
-    case ADD_COMMENT:
-      console.log(typeof action.payload.productId)
-      return {
-        ...state,
-        products: [
-          ...state.products.map((product) =>
-              product.id === action.payload.productId
-                  ? { ...product, comments: [...product.comments, action.payload.id] }
-                  : product
-          ),
-        ],
-      };
-    case DELETE_PRODUCT:
-      return {
-        ...state,
-                products: [
-                  ...state.products.filter((card) => card.id !== action.payload),
-                ],
       };
     default:
       return state;

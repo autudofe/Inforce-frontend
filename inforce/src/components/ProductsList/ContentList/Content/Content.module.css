@@ -43,7 +43,7 @@ p {
     font-weight: bold;
     color: #39393b;
 }
-.count, .comments{
+.count, .weight{
     padding: 0 10px;
     font-weight: bold;
     color: #4b4b4b;
@@ -51,7 +51,7 @@ p {
 .count{
 
 }
-.comments{
+.weight{
 margin-bottom: 10px;
 }
 .tools {

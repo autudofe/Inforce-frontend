@@ -15,17 +15,19 @@ const ProductsList = () => {
   const [sortBy, setSortBy] = useState("name");
 
   const onAddProduct = (values) => {
-      let product = {
-          id: Date.now(),
-          imageUrl: "https://picsum.photos/300/300",
-          ...values,
-          comments: [],
-      }
+    let product = {
+      id: Date.now(),
+      imageUrl: "https://picsum.photos/300/300",
+      ...values,
+    };
 
-    dispatch(
-      addProduct(product)
-    );
-      new ProductServices().addProduct(product).then((r) => console.log(r));
+    new ProductServices().addProduct(product).then((r) => {
+      if (r.status === 201) {
+        dispatch(addProduct(r.data));
+      } else {
+        console.log(r.statusText);
+      }
+    });
   };
 
   const openModal = () => setShowModal(true);
