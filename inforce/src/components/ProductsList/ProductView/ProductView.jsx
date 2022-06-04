@@ -1,34 +1,35 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./ProductView.module.css";
 import { NavLink, useParams } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
 import DataForm from "../../ModalWindow/DataForm/DataForm";
 import ModalWindow from "../../ModalWindow/ModalWindow";
-import {editProduct} from "../../../reducers/actions/actions";
 import CommentsBlock from "./Comments/CommentsBlock";
+import ProductServices from "../../../API/ProductServices";
 
 const ProductView = () => {
-  const dispatch = useDispatch();
+  const productId = Number(useParams().id);
+
+  const [product, setProduct] = useState({})
+
+  const onEditProduct = values =>{
+    new ProductServices()
+        .editProduct(productId, values)
+        .then((r) => console.log(r));
+  }
+
+  useEffect(() => {
+    new ProductServices().getProduct(productId).then((r) => setProduct(r.data));
+  }, [onEditProduct]);
+
   const [showModal, setShowModal] = useState(false);
 
-  const productId = Number(useParams().id);
-  const products = useSelector((state) => state.products.products);
-  const product = products.reduce(
-    (productItem, acc) =>
-      productItem.id === productId ? { ...acc, ...productItem } : { ...acc },
-    {}
-  );
   const { name, count, size, weight, imageUrl } = product;
 
-  const onEditProduct = values =>
-    dispatch(
-        editProduct({
-          ...values,
-        })
-    );
 
+    
+
+  if (!Object.keys(product).length) return <div className={styles.loading}>Loading...</div>;
   return (
-
     <div className={styles.viewContainer}>
       <div>
         <ModalWindow

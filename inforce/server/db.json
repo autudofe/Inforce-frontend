@@ -1,0 +1,99 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "imageUrl": "https://picsum.photos/id/1/300/300",
+      "name": "Avocado",
+      "count": "4",
+      "size": {
+        "width": 300,
+        "height": 600
+      },
+      "weight": "1200g",
+      "comments": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://picsum.photos/id/11/300/300",
+      "name": "Orange",
+      "count": 7,
+      "size": {
+        "width": 10,
+        "height": 10
+      },
+      "weight": "1200g",
+      "comments": []
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://picsum.photos/id/111/300/300",
+      "name": "Banana",
+      "count": 13,
+      "size": {
+        "width": 200,
+        "height": 400
+      },
+      "weight": "300g",
+      "comments": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://picsum.photos/id/112/300/300",
+      "name": "test",
+      "count": 13,
+      "size": {
+        "width": 200,
+        "height": 400
+      },
+      "weight": "300g",
+      "comments": [
+        1,
+        2
+      ]
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "productId": 1,
+      "description": "comment 1 for id 1",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "description": "comment 2 for id 1",
+      "date": "15:00 22.08.2021"
+    },
+    {
+      "id": 1,
+      "productId": 3,
+      "description": "comment 1 for id 2",
+      "date": "16:00 22.08.2021"
+    },
+    {
+      "id": 2,
+      "productId": 3,
+      "description": "comment 2 for id 2",
+      "date": "17:00 22.08.2021"
+    },
+    {
+      "id": 1,
+      "productId": 4,
+      "description": "test",
+      "date": "16:00 22.08.2021"
+    },
+    {
+      "id": 2,
+      "productId": 4,
+      "description": "test",
+      "date": "17:00 22.08.2021"
+    }
+  ]
+}

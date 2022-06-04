@@ -8,6 +8,7 @@ import CommentsForm from "../CommentsForm/CommentsForm";
 import { addComment, editComment } from "../../../../reducers/actions/actions";
 import { useDispatch } from "react-redux";
 import { getDateNow } from "../../../../helpers";
+import ProductServices from "../../../../API/ProductServices";
 
 const CommentsBlockComponent = () => {
   const dispatch = useDispatch();
@@ -15,23 +16,32 @@ const CommentsBlockComponent = () => {
   const [comment, setComment] = useState(null);
   const productId = Number(useParams().id);
 
-  const onEditComment = (values) =>
+  const onEditComment = (values) => {
+      const comment = {
+          ...values,
+          date: getDateNow(),
+      }
     dispatch(
-      editComment({
-        ...values,
-        date: getDateNow(),
-      })
+      editComment(comment)
     );
+    new ProductServices()
+      .editComment(values.productId, values.id, comment)
+      .then((r) => console.log(r));
+  };
 
-  const onAddComment = (values) =>
-    dispatch(
-      addComment({
-        ...values,
-        id: Date.now(),
-        productId,
-        date: getDateNow(),
-      })
-    );
+  const onAddComment = (values) => {
+    const comment = {
+      id: Date.now(),
+      productId,
+      ...values,
+      date: getDateNow(),
+    };
+    dispatch(addComment(comment));
+    new ProductServices().addComment(comment).then((r) => console.log(r));
+    new ProductServices()
+      .addCommentProduct(productId)
+      .then((r) => console.log(r));
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
