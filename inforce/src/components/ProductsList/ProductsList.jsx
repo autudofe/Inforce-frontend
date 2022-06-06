@@ -26,7 +26,6 @@ const ProductsList = () => {
     if (response.status === 201) {
       dispatch(addProduct(response.data));
     }
-    console.log(response);
     handleAlert(response);
   };
 

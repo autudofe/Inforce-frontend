@@ -16,7 +16,7 @@ const CommentsBlockComponent = () => {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState(null);
   const productId = Number(useParams().id);
-
+  const commentsServices = new CommentsServices();
   const handleAlert = useContext(AlertContext);
 
   const onEditComment = async (values) => {
@@ -25,10 +25,7 @@ const CommentsBlockComponent = () => {
       date: getDateNow(),
     };
 
-    const response = await new CommentsServices().editComment(
-      comment.id,
-      comment
-    );
+    const response = await commentsServices.editComment(comment.id, comment);
     if (response.status === 200) {
       dispatch(editComment(response.data));
     }
@@ -43,7 +40,7 @@ const CommentsBlockComponent = () => {
       date: getDateNow(),
     };
 
-    const response = await new CommentsServices().addComment(comment);
+    const response = await commentsServices.addComment(comment);
     if (response.status === 201) {
       dispatch(addComment(response.data));
     }

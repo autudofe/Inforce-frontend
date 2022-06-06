@@ -15,8 +15,10 @@ const CommentsComponent = ({ onStartEditComment }) => {
 
   const handleAlert = useContext(AlertContext);
 
+  const commentsServices = new CommentsServices();
+
   useEffect(() => {
-    new CommentsServices()
+     commentsServices
       .getComments(productId)
       .then((r) => dispatch(addCommentsData(r.data)));
   }, []);
@@ -26,7 +28,7 @@ const CommentsComponent = ({ onStartEditComment }) => {
   const editComment = (comment) => onStartEditComment(comment);
 
   const handleDeleteComment = async ({ id }) => {
-    const response = await new CommentsServices().deleteComment(id);
+    const response = await commentsServices.deleteComment(id);
     if (response.status === 200) {
       dispatch(deleteComment(id));
     }

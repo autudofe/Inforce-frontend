@@ -17,7 +17,6 @@ const Content = ({ product: { id, count, name, imageUrl, weight } }) => {
     if (response.status === 200) {
       dispatch(deleteProductAndComments(id));
     }
-    console.log(response);
     handleAlert(response);
   };
 
