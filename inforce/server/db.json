@@ -14,10 +14,10 @@
     {
       "id": 2,
       "imageUrl": "https://picsum.photos/id/11/300/300",
-      "name": "Orange",
-      "count": "7",
+      "name": "Orange test",
+      "count": "8",
       "size": {
-        "width": "10",
+        "width": "11",
         "height": "10"
       },
       "weight": "1200g"

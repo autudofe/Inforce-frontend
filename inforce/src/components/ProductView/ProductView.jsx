@@ -1,33 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styles from "./ProductView.module.css";
 import { NavLink, useParams } from "react-router-dom";
-import CommentsBlock from "./Comments/CommentsBlock";
 import ProductServices from "../../API/ProductServices";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import DataForm from "../ModalWindow/DataForm/DataForm";
+import {AlertContext} from "../../Context/AlertContextProvider";
+import CommentsBlock from "./CommentsBlock/CommentsBlock";
+
 
 const ProductView = () => {
-  const id = Number(useParams().id);
+  const params = useParams();
+  const id = Number(params.id);
   const [product, setProduct] = useState({})
   const [showModal, setShowModal] = useState(false);
 
+  const handleAlert = useContext(AlertContext);
+
   useEffect(() => {
     new ProductServices().getProduct(id).then((r) => setProduct(r.data));
-  }, [id]);
+  }, []);
 
-  const onEditProduct = values =>{
-    new ProductServices()
-        .editProduct(id, values)
-        .then((r) => {
-          if (r.status === 200) {
-            setProduct(r.data)
-          } else {
-            console.log(r.statusText);
-          }
-        });
+  const onEditProduct = async values => {
+    const response = await new ProductServices().editProduct(id, values);
+    if (response.status === 200) {
+      setProduct(response.data)
+    }
+    console.log(response);
+    handleAlert(response);
   }
-
-
 
   const { name, count, size, weight, imageUrl } = product;
 

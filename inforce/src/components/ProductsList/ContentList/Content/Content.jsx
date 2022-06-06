@@ -1,23 +1,23 @@
 import "./Content.css";
 import styles from "./Content.module.css";
-import React from "react";
+import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { deleteProductAndComments } from "../../../../reducers/actions/actions";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 import ProductServices from "../../../../API/ProductServices";
+import { AlertContext } from "../../../../Context/AlertContextProvider";
 
 const Content = ({ product: { id, count, name, imageUrl, weight } }) => {
   const dispatch = useDispatch();
+  const handleAlert = useContext(AlertContext);
 
-  const deleteElement = () => {
-    new ProductServices().deleteProduct(id).then((r) => {
-      if (r.status === 200) {
-        dispatch(deleteProductAndComments(id));
-      } else {
-        console.log(r.statusText);
-      }
-    });
+  const deleteElement = async () => {
+    const response = await new ProductServices().deleteProduct(id);
+    if (response.status === 200) {
+      dispatch(deleteProductAndComments(id));
+    }
+    handleAlert(response);
   };
 
   return (

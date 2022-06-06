@@ -13,7 +13,6 @@ function App() {
             <Route path="/listView" element={<ProductsList />} />
             <Route path="/productView/:id/" element={<ProductView />} />
         </Routes>
-
     </div>
   );
 }

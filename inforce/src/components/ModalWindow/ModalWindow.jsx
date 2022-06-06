@@ -4,12 +4,8 @@ import classNames from "classnames";
 
 
 const ModalWindow = ({ FormComponent, showModal, ...props }) => {
-
     const { closeModal } = props;
-
-
     if(!showModal) return null;
-
     return (
         <div
             className={classNames(styles.modal, {[styles.modalActive]: showModal})}

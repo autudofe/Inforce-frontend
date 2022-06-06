@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import Header from "./Header/Header";
 import ContentList from "./ContentList/ContentList";
 import ModalWindow from "../ModalWindow/ModalWindow";
@@ -6,28 +6,27 @@ import { addProduct } from "../../reducers/actions/actions";
 import { useDispatch } from "react-redux";
 import DataForm from "../ModalWindow/DataForm/DataForm";
 import ProductServices from "../../API/ProductServices";
+import {AlertContext} from "../../Context/AlertContextProvider";
 
 const ProductsList = () => {
-
   const dispatch = useDispatch();
+  const handleAlert = useContext(AlertContext);
   const [showModal, setShowModal] = useState(false);
 
   const [sortBy, setSortBy] = useState("name");
 
-  const onAddProduct = (values) => {
+  const onAddProduct = async (values) => {
     let product = {
       id: Date.now(),
       imageUrl: "https://picsum.photos/300/300",
       ...values,
     };
 
-    new ProductServices().addProduct(product).then((r) => {
-      if (r.status === 201) {
-        dispatch(addProduct(r.data));
-      } else {
-        console.log(r.statusText);
-      }
-    });
+    const response = await new ProductServices().addProduct(product);
+    if (response.status === 201) {
+      dispatch(addProduct(response.data));
+    }
+    handleAlert(response);
   };
 
   const openModal = () => setShowModal(true);

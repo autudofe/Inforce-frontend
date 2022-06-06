@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Comments.module.css";
 import { useParams } from "react-router-dom";
-import ProductServices from "../../../API/ProductServices";
 import {
   addCommentsData,
   deleteComment,
-} from "../../../reducers/actions/actions";
+} from "../../../../reducers/actions/actions";
+import { AlertContext } from "../../../../Context/AlertContextProvider";
+import CommentsServices from "../../../../API/CommentsServices";
 
 const CommentsComponent = ({ onStartEditComment }) => {
   const productId = Number(useParams().id);
   const dispatch = useDispatch();
 
+  const handleAlert = useContext(AlertContext);
+
+  const commentsServices = new CommentsServices();
+
   useEffect(() => {
-    new ProductServices()
+     commentsServices
       .getComments(productId)
       .then((r) => dispatch(addCommentsData(r.data)));
   }, []);
@@ -22,14 +27,12 @@ const CommentsComponent = ({ onStartEditComment }) => {
 
   const editComment = (comment) => onStartEditComment(comment);
 
-  const handleDeleteComment = ({ id }) => {
-    new ProductServices().deleteComment(id).then((r) => {
-      if (r.status === 200) {
-        dispatch(deleteComment(id));
-      } else {
-        console.log(r.statusText);
-      }
-    });
+  const handleDeleteComment = async ({ id }) => {
+    const response = await commentsServices.deleteComment(id);
+    if (response.status === 200) {
+      dispatch(deleteComment(id));
+    }
+    handleAlert(response);
   };
 
   if (!comments.length) return <div className={styles.noData}>No data</div>;
