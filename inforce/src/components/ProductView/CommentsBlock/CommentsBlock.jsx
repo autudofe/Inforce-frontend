@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../ProductView.module.css";
 import classNames from "classnames";
-import Comments from "./Comments";
 import { useParams } from "react-router-dom";
 import CommentsForm from "../CommentsForm/CommentsForm";
 import { useDispatch } from "react-redux";
-import ProductServices from "../../../API/ProductServices";
 import { addComment, editComment } from "../../../reducers/actions/actions";
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import { getDateNow } from "../../../helpers";
+import { AlertContext } from "../../../Context/AlertContextProvider";
+import CommentsServices from "../../../API/CommentsServices";
+import Comments from "./Comments/Comments";
 
 const CommentsBlockComponent = () => {
   const dispatch = useDispatch();
@@ -16,22 +17,25 @@ const CommentsBlockComponent = () => {
   const [comment, setComment] = useState(null);
   const productId = Number(useParams().id);
 
-  const onEditComment = (values) => {
+  const handleAlert = useContext(AlertContext);
+
+  const onEditComment = async (values) => {
     const comment = {
       ...values,
       date: getDateNow(),
     };
 
-    new ProductServices().editComment(comment.id, comment).then((r) => {
-      if (r.status === 200) {
-        dispatch(editComment(r.data));
-      } else {
-        console.log(r.statusText);
-      }
-    });
+    const response = await new CommentsServices().editComment(
+      comment.id,
+      comment
+    );
+    if (response.status === 200) {
+      dispatch(editComment(response.data));
+    }
+    handleAlert(response);
   };
 
-  const onAddComment = (values) => {
+  const onAddComment = async (values) => {
     const comment = {
       id: Date.now(),
       productId,
@@ -39,13 +43,11 @@ const CommentsBlockComponent = () => {
       date: getDateNow(),
     };
 
-    new ProductServices().addComment(comment).then((r) => {
-      if (r.status === 201) {
-        dispatch(addComment(r.data));
-      } else {
-        console.log(r.statusText);
-      }
-    });
+    const response = await new CommentsServices().addComment(comment);
+    if (response.status === 201) {
+      dispatch(addComment(response.data));
+    }
+    handleAlert(response);
   };
 
   const handleCloseModal = () => {
