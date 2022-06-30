@@ -22,7 +22,7 @@ const AlertContextProvider = ({ children }) => {
   return (
     <AlertContext.Provider value={handleAlert}>
       {children}
-      <Snackbar alert={alert} setAlert={setAlert} />
+      {alert.show && <Snackbar alert={alert} setAlert={setAlert} />}
     </AlertContext.Provider>
   );
 };

@@ -58,6 +58,18 @@
       "productId": 3,
       "description": "comment 2 for id 2",
       "date": "17:00 22.08.2021"
+    },
+    {
+      "id": 1654533043801,
+      "productId": 2,
+      "description": "asd",
+      "date": "06.06.2022, 19:30"
+    },
+    {
+      "id": 1654533049046,
+      "productId": 2,
+      "description": "eq",
+      "date": "06.06.2022, 19:30"
     }
   ]
 }

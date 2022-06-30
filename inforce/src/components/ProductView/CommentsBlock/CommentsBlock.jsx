@@ -27,7 +27,7 @@ const CommentsBlockComponent = () => {
 
     const response = await commentsServices.editComment(comment.id, comment);
     if (response.status === 200) {
-      dispatch(editComment(response.data));
+     return  dispatch(editComment(response.data));
     }
     handleAlert(response);
   };

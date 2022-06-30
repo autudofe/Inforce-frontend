@@ -13,15 +13,15 @@ const ProductView = () => {
   const id = Number(params.id);
   const [product, setProduct] = useState({})
   const [showModal, setShowModal] = useState(false);
-
+  const productServices = new ProductServices();
   const handleAlert = useContext(AlertContext);
 
   useEffect(() => {
-    new ProductServices().getProduct(id).then((r) => setProduct(r.data));
+     productServices.getProduct(id).then((r) => setProduct(r.data));
   }, []);
 
   const onEditProduct = async values => {
-    const response = await new ProductServices().editProduct(id, values);
+    const response = await productServices.editProduct(id, values);
     if (response.status === 200) {
       setProduct(response.data)
     }
